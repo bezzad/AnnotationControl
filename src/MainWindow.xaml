@@ -7,9 +7,7 @@
         mc:Ignorable="d"
         Title=".Net Core" Height="450" Width="800">
     <Grid>
-        <Button x:Name="button1" Content="Button" Click="button1_Click" Height="30" VerticalAlignment="Top" d:LayoutOverrides="Height" Margin="251,10,380,0" />
-
-        <core:Annotation BorderBrush="Teal" Margin="500,100,5,100">
+        <core:Annotation BorderBrush="Teal" Margin="118,100,213,107" d:LayoutOverrides="HorizontalAlignment">
             <ScrollViewer  SnapsToDevicePixels="True" VerticalScrollBarVisibility="Auto" Margin="10">
 
                 <TextBlock Foreground="Teal" FlowDirection="RightToLeft" TextAlignment="Justify" TextWrapping="Wrap">دکترها به بورلی هشدار داده بودند که لازم است همیشه یوجین را تحت نظر داشته باشد. دکترها می‌گفتند که اگر او گم شود، دیگر قادر نخواهد بود راه خانه‌اش را پیدا کند. ولی یک روز صبح در حالی که بورلی در حال لباس پوشیدن بود، یوجین از در جلویی بیرون رفت. یوجین عادت داشت از این اتاق به آن اتاق برود، برای همین مدتی طول کشید تا بورلی متوجه شود که یوجین آنجا نیست و هنگامی که فهمید به شدت نگران شد، بیرون دوید و با دقت خیابان را نگاه کرد اما نتوانست یوجین را ببیند. او به خانه همسایه‌ها رفت و محکم به شیشه پنجره‌شان زد. خانه‌های آنها شبیه خانه خودشان بود. آیا این امکان وجود داشت که یوجین گیج شده و داخل رفته باشد؟ بورلی به سمت در دوید و زنگ را زد تا اینکه کسی جواب داد. یوجین آنجا نبود. بورلی در حالی که اسم یوجین را فریاد می‌زد، دوباره به خیابان دوید. بورلی گریه‌اش گرفته بود. اگر یوجین به خیابان پر از اتومبیل رفته باشد چه؟ چطور می‌توانست به دیگران بگوید که کجا زندگی می‌کند؟ بورلی پانزده دقیقه بود که بیرون بود و همه جا را می‌گشت. او به سمت خانه دوید تا به پلیس زنگ بزند. 
