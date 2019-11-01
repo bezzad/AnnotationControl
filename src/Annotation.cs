@@ -33,10 +33,11 @@ namespace WPF.Core
             get => (double)GetValue(PaddingProperty);
             set => SetValue(PaddingProperty, value);
         }
-
+        public Point BubblePeakPosition { get; set; }
 
         public Annotation()
         {
+            BubblePeakPosition = new Point(ActualWidth / 2, 0);
             BorderBrush = Brushes.Teal;
             BorderThickness = 2;
             _pen = new Pen(Brushes.Transparent, BorderThickness);
@@ -49,9 +50,9 @@ namespace WPF.Core
 
             var a = new Point(0, cornerRadius);
             var b = new Point(cornerRadius, 0);
-            var c = new Point(ActualWidth / 2 - arrowRadius, 0);
-            var d = new Point(ActualWidth / 2, -cornerRadius);
-            var e = new Point(ActualWidth / 2 + arrowRadius, 0);
+            var c = new Point(BubblePeakPosition.X - arrowRadius, 0);
+            var d = new Point(BubblePeakPosition.X, -cornerRadius);
+            var e = new Point(BubblePeakPosition.X + arrowRadius, 0);
             var f = new Point(ActualWidth - cornerRadius, 0);
             var g = new Point(ActualWidth, 10);
             var h = new Point(ActualWidth, ActualHeight - cornerRadius);
