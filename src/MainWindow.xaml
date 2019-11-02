@@ -7,14 +7,63 @@
         mc:Ignorable="d"
         Title=".Net Core" Height="450" Width="800" MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown">
     <Grid>
-        <core:Annotation x:Name="Note" BorderBrush="Teal" Margin="118,100,213,107" d:LayoutOverrides="HorizontalAlignment">
-            <ScrollViewer  SnapsToDevicePixels="True" VerticalScrollBarVisibility="Auto" Margin="10">
+        <TextBlock FlowDirection="LeftToRight" TextAlignment="Justify" TextWrapping="Wrap" Padding="20">
+            Lorem ipsum dolor sit amet, eos exerci explicari definitionem ut. Eum enim brute in. No quis nominavi duo, has nibh errem commune ad. Eu ius duis probo, eu omnesque partiendo mea, at vix quot partem meliore. Percipit constituto reprehendunt ei quo, error iudicabit moderatius ei pri.
 
-                <TextBlock Foreground="Teal" FlowDirection="RightToLeft" TextAlignment="Justify" TextWrapping="Wrap">دکترها به بورلی هشدار داده بودند که لازم است همیشه یوجین را تحت نظر داشته باشد. دکترها می‌گفتند که اگر او گم شود، دیگر قادر نخواهد بود راه خانه‌اش را پیدا کند. ولی یک روز صبح در حالی که بورلی در حال لباس پوشیدن بود، یوجین از در جلویی بیرون رفت. یوجین عادت داشت از این اتاق به آن اتاق برود، برای همین مدتی طول کشید تا بورلی متوجه شود که یوجین آنجا نیست و هنگامی که فهمید به شدت نگران شد، بیرون دوید و با دقت خیابان را نگاه کرد اما نتوانست یوجین را ببیند. او به خانه همسایه‌ها رفت و محکم به شیشه پنجره‌شان زد. خانه‌های آنها شبیه خانه خودشان بود. آیا این امکان وجود داشت که یوجین گیج شده و داخل رفته باشد؟ بورلی به سمت در دوید و زنگ را زد تا اینکه کسی جواب داد. یوجین آنجا نبود. بورلی در حالی که اسم یوجین را فریاد می‌زد، دوباره به خیابان دوید. بورلی گریه‌اش گرفته بود. اگر یوجین به خیابان پر از اتومبیل رفته باشد چه؟ چطور می‌توانست به دیگران بگوید که کجا زندگی می‌کند؟ بورلی پانزده دقیقه بود که بیرون بود و همه جا را می‌گشت. او به سمت خانه دوید تا به پلیس زنگ بزند. 
+            Cu vide scriptorem mea, an veniam senserit eum. Quo elit commune appetere ea, pri ex augue altera ocurreret, te zril homero legendos sea. Id nemore vidisse mediocritatem qui, duo in euismod splendide. Pro an summo delicatissimi. Choro commune usu ut, impedit fuisset torquatos ea pro.
+
+            Rebum fugit vitae an has, assum cotidieque adversarium mei ei. Hinc interesset ut duo, dicam dictas consequat ex mel. Sit te etiam imperdiet, dolor tollit pro ei, dicta graeci elaboraret et eam. Nullam altera invenire an cum, cu diam laudem voluptua vix. Ex essent fabulas duo. Qui tation tantas ornatus eu, quot ipsum liberavisse in est.
+
+            Dolorem iracundia ne vis, at omnium maiorum vim. Ut saperet eloquentiam quo. Mei nullam invidunt disputationi ne, et propriae senserit usu. Ferri facete ut vel, doctus persius pertinacia an mel.
+
+            Eos tamquam euismod iracundia in. Quo expetendis eloquentiam reprehendunt cu, nominati periculis vim ut. Te vis paulo pertinax, ad mea inimicus partiendo. Mentitum ocurreret intellegebat sea at, ad justo volumus albucius cum.
+
+            Duo mutat insolens cu. Noster expetenda vulputate ea sit. Cu eos ipsum accusata, tamquam appareat persecuti vel te, doming concludaturque eos cu. At eam putent laoreet persequeris. Nihil legendos eu mel, quas minimum vel te.
+
+            Usu error maiorum lobortis in, ei nec salutandi referrentur. Sed eu modo tibique, eu eam sint ipsum temporibus. Per an delectus menandri, eum copiosae evertitur ei. Et nam esse reprehendunt. Ex ius omnes vivendum pericula.
+
+            Ea vidit exerci populo cum, facer movet ne duo. Duo ne augue simul. Sea insolens pertinacia in, ea nam alia discere inimicus. Nec simul apeirian consequuntur no, eos no magna nihil mnesarchum. Vim id prima voluptaria. Eu vix tale ponderum efficiantur, falli perpetua molestiae ei mel, alii viderer repudiandae ei sea.
+
+            Ea per purto moderatius, vis labitur deterruisset ut. Ea tollit soluta vocibus sea, oporteat tacimates ad duo. At delectus urbanitas eam. No vide diceret vis, vix ei ubique sadipscing.
+
+            Eu zril iracundia forensibus est, in quo invidunt perfecto. Nec ne meliore graecis. Sea ne ipsum appareat accusata, eu mel erat tollit legendos, ex has putent scriptorem. Veritus suscipit perpetua usu cu, eam atqui sonet ne, viderer delectus forensibus vim ne. Pro an errem detraxit, nibh dolore putant id mea. Laudem omittam ad eam, esse sensibus dignissim nec ad. Cu dictas similique assueverit vel.
+
+            Clita utroque duo ut, duis laudem scripta sit ut. Eos ea numquam offendit facilisis, et vidisse assentior mediocritatem qui. Te mea integre verterem rationibus, movet consequat eam te. Alia senserit prodesset sed at. Paulo nihil ad mel, an duo sale clita theophrastus.
+
+            Ad appareat praesent posidonium sed. Et ius ignota alienum accumsan, assum senserit est in, nam justo suavitate inciderint ei. Quo utinam habemus nominati te, ut sed clita vocent omittam, mentitum pertinax gubergren mei ex. Congue admodum insolens duo ne.
+
+            Ne omnes convenire omittantur pri, munere tamquam deserunt cum in. Ut has minimum sensibus voluptaria, qui illum quaeque vivendum cu, movet fastidii detraxit vim ex. Noster splendide ex pro, mei at lorem libris, in pro meis mundi dissentias. Noster accusam ex eos. Ius ne prompta maiestatis moderatius, ea vim facilisis expetenda.
+
+            Ad nec atqui alienum officiis, ea aeque voluptua pertinax per. Eripuit imperdiet neglegentur vel te. Ferri semper corpora vim te, an sea nemore laboramus, alienum percipitur ne pri. Sit te illud singulis, feugait molestiae eu vel.
+
+            Usu ludus oporteat te, sed in paulo oblique tacimates, mea cu nostro tractatos. Cibo complectitur consequuntur duo ei. Nibh tincidunt te eos, est at alia consequat necessitatibus. Ne ocurreret deseruisse vel. In per munere doming.
+
+            Mei cu nobis delectus, usu utroque democritum et. Elit accusam ad quo, quo libris aperiri id. At vix doctus periculis dissentiet. An erant mollis appetere pro. Ad sanctus commune interesset ius, deserunt aliquando mel no.
+
+            Zril equidem in per. Tantas nullam lucilius his no. Cum option veritus ut, falli ignota ridens cu sed. Est no veri quaeque. Ne unum mazim his, te his vulputate philosophia, hinc laudem mnesarchum et sed.
+
+            Ad bonorum recteque pericula his. Pro aliquid intellegat id, ad amet omnesque eos. Nisl urbanitas nec et, eos ei brute solet postulant, cu harum suscipit deterruisset sit. Id mel adhuc tritani, nec ut movet comprehensam, maluisset cotidieque an est. Intellegat accommodare definitiones eam in. Cu eos illud velit interpretaris, pro an voluptaria scribentur, ut apeirian oportere sea.
+
+            In officiis invidunt intellegat pri, usu nihil eruditi scriptorem in, decore timeam at pri. Recusabo neglegentur concludaturque duo no, sed suas abhorreant ex, nisl errem ius et. Has eu nisl suscipit officiis, eam an ubique ignota interesset. Dico dicat qui id. Usu at legimus dolorem moderatius, no nisl laoreet ius. Ex mazim simul has.
+
+            Te ancillae detracto est, per hinc partem quaerendum et, nam an posidonium reprimique. Est conceptam intellegam ad, at pro tollit audiam volumus, ius no nulla menandri consequat. Iuvaret concludaturque vim cu, no vim dicant torquatos quaerendum. Id his rebum principes hendrerit. An graece adipisci sed.
+
+            Voluptua convenire sit cu, accusamus similique voluptaria te nec, mei in porro omnium. Malis voluptatibus comprehensam in vim. Ius habeo audire ex, solum inimicus necessitatibus ut duo. Augue dolorum ne duo, id est enim omnium dolorem. Ne vel solet animal comprehensam, in pro iudico principes intellegam, ut per inermis recusabo petentium.
+
+            Pro quem nominati in, fuisset explicari cu est, vis cu aeque corpora pertinax. Id sed oratio mucius invidunt, ea tibique deserunt sed, an oblique oportere eloquentiam vim. Mel in nisl quaeque forensibus, nihil essent ornatus te mel, eam ea sint meis. Eum at unum eruditi theophrastus, mel id elit brute.
+
+            Ei nec mollis corrumpit adversarium. Vis ullum error aeterno no, noster nonumes in vis, no mnesarchum efficiantur vix. At soleat dolores splendide eum, insolens inimicus nam cu, ignota aliquam eum an. Novum iriure voluptaria no per, in populo tibique singulis nec. Id quo omnium recusabo, sed et.
+        </TextBlock>
+        <core:Annotation x:Name="Note" BorderBrush="Teal"  Margin="118,100,213,107" d:LayoutOverrides="HorizontalAlignment">
+            <Border Background="Bisque" BorderBrush="Black" BorderThickness="0" CornerRadius="10">
+                <ScrollViewer  SnapsToDevicePixels="True" VerticalScrollBarVisibility="Auto" Margin="10">
+
+                    <TextBlock Foreground="Teal" FlowDirection="RightToLeft" TextAlignment="Justify" TextWrapping="Wrap">دکترها به بورلی هشدار داده بودند که لازم است همیشه یوجین را تحت نظر داشته باشد. دکترها می‌گفتند که اگر او گم شود، دیگر قادر نخواهد بود راه خانه‌اش را پیدا کند. ولی یک روز صبح در حالی که بورلی در حال لباس پوشیدن بود، یوجین از در جلویی بیرون رفت. یوجین عادت داشت از این اتاق به آن اتاق برود، برای همین مدتی طول کشید تا بورلی متوجه شود که یوجین آنجا نیست و هنگامی که فهمید به شدت نگران شد، بیرون دوید و با دقت خیابان را نگاه کرد اما نتوانست یوجین را ببیند. او به خانه همسایه‌ها رفت و محکم به شیشه پنجره‌شان زد. خانه‌های آنها شبیه خانه خودشان بود. آیا این امکان وجود داشت که یوجین گیج شده و داخل رفته باشد؟ بورلی به سمت در دوید و زنگ را زد تا اینکه کسی جواب داد. یوجین آنجا نبود. بورلی در حالی که اسم یوجین را فریاد می‌زد، دوباره به خیابان دوید. بورلی گریه‌اش گرفته بود. اگر یوجین به خیابان پر از اتومبیل رفته باشد چه؟ چطور می‌توانست به دیگران بگوید که کجا زندگی می‌کند؟ بورلی پانزده دقیقه بود که بیرون بود و همه جا را می‌گشت. او به سمت خانه دوید تا به پلیس زنگ بزند. 
                     وقتی بورلی در را باز کرد، دید که یوجین توی اتاق پذیرایی روبروی تلویزیون نشسته و شبکه هیستوری (تاریخ) را تماشا می‌کند. یوجین با دیدن اشک‌های بورلی گیج شده بود. او گفت که به خاطر نمی‌آورد که خانه را ترک کرده باشد، یادش نمی‌آمد که کجا بوده
-                </TextBlock>
+                    </TextBlock>
 
-            </ScrollViewer>
+                </ScrollViewer>
+            </Border>
         </core:Annotation>
     </Grid>
 </Window>

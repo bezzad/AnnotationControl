@@ -92,15 +92,9 @@ namespace WPF.Core
 
         protected Geometry CreateArcGeometry(Point startPos, Point endPos, double radius)
         {
-            var arcSeg = new ArcSegment
-            {
-                Point = endPos,
-                Size = new Size(radius, radius),
-                IsLargeArc = false,
-                SweepDirection = SweepDirection.Clockwise,
-                RotationAngle = 0,
-                IsStroked = true
-            };
+            var arcSeg = new ArcSegment(endPos, new Size(radius, radius), 0, false, SweepDirection.Clockwise, true);
+
+            //var seg = new LineSegment();
 
             var pthFigure = new PathFigure(startPos, new List<PathSegment> { arcSeg }, false) { IsFilled = false };
             var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, null);
