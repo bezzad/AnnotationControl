@@ -56,10 +56,8 @@
             Ei nec mollis corrumpit adversarium. Vis ullum error aeterno no, noster nonumes in vis, no mnesarchum efficiantur vix. At soleat dolores splendide eum, insolens inimicus nam cu, ignota aliquam eum an. Novum iriure voluptaria no per, in populo tibique singulis nec. Id quo omnium recusabo, sed et.
         </TextBlock>
 
-
-
         <core:Annotation x:Name="Note" Width="300" Height="200">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="5">
+            <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
                 <ScrollViewer.Style>
                     <Style TargetType="{x:Type ScrollViewer}">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>
