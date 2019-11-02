@@ -38,14 +38,14 @@ namespace WPF.Core
         public Annotation()
         {
             BubblePeakPosition = new Point(ActualWidth / 2, 0);
-            BorderBrush = Brushes.Teal;
-            BorderThickness = 2;
-            _pen = new Pen(Brushes.Transparent, BorderThickness);
+            BorderBrush = new SolidColorBrush(Colors.Bisque) { Opacity = 0.97 };
+            BorderThickness = 1;
+            _pen = new Pen(Brushes.Teal, BorderThickness);
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            var arrowRadius = 5;
+            var arrowRadius = 8;
             var cornerRadius = 10;
 
             var a = new Point(0, cornerRadius);
@@ -60,9 +60,6 @@ namespace WPF.Core
             var j = new Point(cornerRadius, ActualHeight);
             var k = new Point(0, ActualHeight - cornerRadius);
 
-
-            if (_pen.Brush != BorderBrush)
-                _pen.Brush = BorderBrush;
             //                  d
             //                 / \
             //     b____2____c/3 4\e___5___f
@@ -76,30 +73,24 @@ namespace WPF.Core
             //    k                         h
             //  10(j___________9___________i)8
             //
-            drawingContext.DrawGeometry(BorderBrush, _pen, CreateArcGeometry(a, b, cornerRadius)); // 1
-            drawingContext.DrawLine(_pen, b, c); //    2
-            drawingContext.DrawLine(_pen, c, d); //    3
-            drawingContext.DrawLine(_pen, d, e); //    4
-            drawingContext.DrawLine(_pen, e, f); //    5
-            drawingContext.DrawGeometry(BorderBrush, _pen, CreateArcGeometry(f, g, cornerRadius)); // 6
-            drawingContext.DrawLine(_pen, g, h); //    7
-            drawingContext.DrawGeometry(BorderBrush, _pen, CreateArcGeometry(h, i, cornerRadius)); // 8
-            drawingContext.DrawLine(_pen, i, j); //     9
-            drawingContext.DrawGeometry(BorderBrush, _pen, CreateArcGeometry(j, k, cornerRadius)); // 10
-            drawingContext.DrawLine(_pen, k, a); //     11
-        }
+            var pathSegments = new List<PathSegment>
+            {
+                new ArcSegment(b, new Size(cornerRadius, cornerRadius), 0, false, SweepDirection.Clockwise, true),
+                new LineSegment(c, true),
+                new LineSegment(d, true),
+                new LineSegment(e, true),
+                new LineSegment(f, true),
+                new ArcSegment(g, new Size(cornerRadius, cornerRadius), 0, false, SweepDirection.Clockwise, true),
+                new LineSegment(h, true),
+                new ArcSegment(i, new Size(cornerRadius, cornerRadius), 0, false, SweepDirection.Clockwise, true),
+                new LineSegment(j, true),
+                new ArcSegment(k, new Size(cornerRadius, cornerRadius), 0, false, SweepDirection.Clockwise, true),
+                new LineSegment(a, true)
+            };
 
-
-        protected Geometry CreateArcGeometry(Point startPos, Point endPos, double radius)
-        {
-            var arcSeg = new ArcSegment(endPos, new Size(radius, radius), 0, false, SweepDirection.Clockwise, true);
-
-            //var seg = new LineSegment();
-
-            var pthFigure = new PathFigure(startPos, new List<PathSegment> { arcSeg }, false) { IsFilled = false };
-            var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, null);
-
-            return pthGeometry;
+            var pthFigure = new PathFigure(a, pathSegments, false) { IsFilled = true };
+            var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.Nonzero, null);
+            drawingContext.DrawGeometry(BorderBrush, _pen, pthGeometry);
         }
     }
 }
