@@ -116,8 +116,8 @@
 
     </Window.Resources>
 
-    <Grid Background="Bisque">
-        <TextBlock FlowDirection="LeftToRight" TextAlignment="Justify" TextWrapping="Wrap" Padding="20">
+    <Canvas Background="Bisque" Name="MainCanvas">
+        <TextBlock FlowDirection="LeftToRight" TextAlignment="Justify" TextWrapping="Wrap" Padding="20" Height="414" Canvas.Left="10" Width="780" Canvas.Top="10">
             Lorem ipsum dolor sit amet, eos exerci explicari definitionem ut. Eum enim brute in. No quis nominavi duo, has nibh errem commune ad. Eu ius duis probo, eu omnesque partiendo mea, at vix quot partem meliore. Percipit constituto reprehendunt ei quo, error iudicabit moderatius ei pri.
 
             Cu vide scriptorem mea, an veniam senserit eum. Quo elit commune appetere ea, pri ex augue altera ocurreret, te zril homero legendos sea. Id nemore vidisse mediocritatem qui, duo in euismod splendide. Pro an summo delicatissimi. Choro commune usu ut, impedit fuisset torquatos ea pro.
@@ -166,5 +166,5 @@
         </TextBlock>
 
         <core:Annotation x:Name="Note" Width="300" Height="200" FlowDirection="RightToLeft" Padding="4" Margin="178,144,322,90" />
-    </Grid>
+    </Canvas>
 </Window>

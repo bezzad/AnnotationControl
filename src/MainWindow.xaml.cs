@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace WPF.Core
@@ -21,9 +22,12 @@ namespace WPF.Core
         private void MainWindow_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var padding = 25;
-            var posInView = e.GetPosition(this);
-            Note.Height = ActualHeight / 2 - padding;
-            Note.Margin = new Thickness(posInView.X - 32, posInView.Y + padding, Width - posInView.X - Note.Width, Height - posInView.Y - Note.Height - 50 - padding);
+            var posInView = e.GetPosition(MainCanvas);
+            Note.Height = MainCanvas.ActualHeight / 2 - padding;
+            Canvas.SetLeft(Note, posInView.X - 203);
+            Canvas.SetTop(Note, posInView.Y - 130);
+           
+            //Note.Margin = new Thickness(posInView.X - 32, posInView.Y + padding, Width - posInView.X - Note.Width, Height - posInView.Y - Note.Height - 50 - padding);
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
