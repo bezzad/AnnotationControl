@@ -37,8 +37,8 @@ namespace WPF.Core
             {
                 var posInView = e.GetPosition(MainCanvas);
                 Annotation.Height = MainCanvas.ActualHeight / 2 - 25;
-                Canvas.SetLeft(Annotation, posInView.X);
-                Canvas.SetTop(Annotation, posInView.Y);
+                Canvas.SetLeft(Annotation, posInView.X - 32);
+                Canvas.SetTop(Annotation, posInView.Y + 25);
                 Annotation.Visibility = Visibility.Visible;
             }
         }
