@@ -139,8 +139,6 @@ namespace WPF.Core
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            _pen.Brush = BorderBrush;
-            _pen.Thickness = BorderThickness;
             //
             //                  d
             //                 / \
