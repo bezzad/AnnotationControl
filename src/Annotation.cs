@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace WPF.Core
 {
-    public class Annotation : Decorator
+    public sealed class Annotation : Decorator
     {
         private readonly Pen _pen;
+        private readonly ScrollViewer _scrollBar;
+        private readonly TextBlock _textViewer;
 
         public static readonly DependencyProperty PaddingProperty = DependencyProperty.Register(nameof(Padding), typeof(double), typeof(Annotation), new PropertyMetadata(default(double)));
         public static readonly DependencyProperty BorderThicknessProperty = DependencyProperty.Register(nameof(BorderThickness), typeof(double), typeof(Annotation), new PropertyMetadata(default(double)));
@@ -18,7 +19,19 @@ namespace WPF.Core
         public static readonly DependencyProperty BubblePeakWidthProperty = DependencyProperty.Register(nameof(BubblePeakWidth), typeof(double), typeof(Annotation), new PropertyMetadata(default(double)));
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(double), typeof(Annotation), new PropertyMetadata(default(double)));
         public static readonly DependencyProperty BubblePeakPositionProperty = DependencyProperty.Register(nameof(BubblePeakPosition), typeof(Point), typeof(Annotation), new PropertyMetadata(default(Point)));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(Annotation), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty TextAlignProperty = DependencyProperty.Register(nameof(TextAlign), typeof(TextAlignment), typeof(Annotation), new PropertyMetadata(default(TextAlignment)));
 
+        public TextAlignment TextAlign
+        {
+            get => (TextAlignment) GetValue(TextAlignProperty);
+            set => SetValue(TextAlignProperty, value);
+        }
+        public string Text
+        {
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
+        }
         public Point BubblePeakPosition
         {
             get => (Point)GetValue(BubblePeakPositionProperty);
@@ -60,17 +73,34 @@ namespace WPF.Core
             set => SetValue(PaddingProperty, value);
         }
 
+        
+        
         public Annotation()
         {
+            BorderThickness = 1;
             CornerRadius = 10;
             BubblePeakWidth = 16;
-            BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth , 0);
             BorderBrush = Brushes.Teal;
+            _pen = new Pen(BorderBrush, BorderThickness);
+            _textViewer = new TextBlock()
+            {
+                TextWrapping = TextWrapping.Wrap
+            };
+
+            _scrollBar = new ScrollViewer()
+            {
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                Content = _textViewer
+            };
+
+            Padding = 5;
+            BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth, 0);
             Foreground = Brushes.Teal;
             Background = new SolidColorBrush(Colors.Bisque) { Opacity = 0.97 };
-            BorderThickness = 1;
-            _pen = new Pen(BorderBrush, BorderThickness);
+            TextAlign = TextAlignment.Justify;
+            Child = _scrollBar;
         }
+
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -83,6 +113,26 @@ namespace WPF.Core
 
                 if (BubblePeakPosition.X > ActualWidth - CornerRadius - BubblePeakWidth)
                     BubblePeakPosition = new Point(ActualWidth - CornerRadius - BubblePeakWidth, BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight);
+            }
+            else if(e.Property.Name == nameof(Text))
+            {
+                _textViewer.Text = Text;
+            }
+            else if(e.Property.Name == nameof(FlowDirection))
+            {
+                _textViewer.FlowDirection = FlowDirection;
+            }
+            else if(e.Property.Name == nameof(TextAlign))
+            {
+                _textViewer.TextAlignment = TextAlign;
+            }
+            else if (e.Property.Name == nameof(Foreground))
+            {
+                _textViewer.Foreground = Foreground;
+            }
+            else if (e.Property.Name == nameof(Padding))
+            {
+                _scrollBar.Margin = _textViewer.Padding = new Thickness(Padding);
             }
         }
 
