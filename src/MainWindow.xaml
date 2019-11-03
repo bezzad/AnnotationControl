@@ -164,7 +164,5 @@
 
             Ei nec mollis corrumpit adversarium. Vis ullum error aeterno no, noster nonumes in vis, no mnesarchum efficiantur vix. At soleat dolores splendide eum, insolens inimicus nam cu, ignota aliquam eum an. Novum iriure voluptaria no per, in populo tibique singulis nec. Id quo omnium recusabo, sed et.
         </TextBlock>
-
-        <core:Annotation x:Name="Note" Width="300" Height="200" FlowDirection="RightToLeft" Padding="4" Margin="178,144,322,90" />
     </Canvas>
 </Window>
