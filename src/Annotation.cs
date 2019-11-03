@@ -106,34 +106,35 @@ namespace WPF.Core
         {
             base.OnPropertyChanged(e);
 
-            if (IsLoaded && e.Property.Name == nameof(BubblePeakPosition))
+            if (IsLoaded)
             {
-                if (BubblePeakPosition.X < CornerRadius + BubblePeakWidth)
-                    BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth, BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight);
+                if (e.Property.Name == nameof(BubblePeakPosition))
+                {
+                    if (BubblePeakPosition.X < CornerRadius + BubblePeakWidth)
+                        BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth,
+                            BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight);
 
-                if (BubblePeakPosition.X > ActualWidth - CornerRadius - BubblePeakWidth)
-                    BubblePeakPosition = new Point(ActualWidth - CornerRadius - BubblePeakWidth, BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight);
+                    if (BubblePeakPosition.X > ActualWidth - CornerRadius - BubblePeakWidth)
+                        BubblePeakPosition = new Point(ActualWidth - CornerRadius - BubblePeakWidth,
+                            BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight);
+                }
             }
-            else if(e.Property.Name == nameof(Text))
-            {
+            
+            if (e.Property.Name == nameof(Text) && _textViewer != null)
                 _textViewer.Text = Text;
-            }
-            else if(e.Property.Name == nameof(FlowDirection))
-            {
+            else if (e.Property.Name == nameof(BorderBrush) && _pen != null)
+                _pen.Brush = BorderBrush;
+            else if (e.Property.Name == nameof(BorderThickness) && _pen != null)
+                _pen.Thickness = BorderThickness;
+            else if (e.Property.Name == nameof(FlowDirection) && _textViewer != null)
                 _textViewer.FlowDirection = FlowDirection;
-            }
-            else if(e.Property.Name == nameof(TextAlign))
-            {
+            else if (e.Property.Name == nameof(TextAlign) && _textViewer != null)
                 _textViewer.TextAlignment = TextAlign;
-            }
-            else if (e.Property.Name == nameof(Foreground))
-            {
+            else if (e.Property.Name == nameof(Foreground) && _textViewer != null)
                 _textViewer.Foreground = Foreground;
-            }
-            else if (e.Property.Name == nameof(Padding))
-            {
+            else if (e.Property.Name == nameof(Padding) && _scrollBar != null && _textViewer != null)
                 _scrollBar.Margin = _textViewer.Padding = new Thickness(Padding);
-            }
+            
         }
 
         protected override void OnRender(DrawingContext drawingContext)
