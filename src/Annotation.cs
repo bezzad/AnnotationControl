@@ -64,7 +64,7 @@ namespace WPF.Core
         {
             CornerRadius = 10;
             BubblePeakWidth = 16;
-            BubblePeakPosition = new Point(ActualWidth / 2, 0);
+            BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth , 0);
             BorderBrush = Brushes.Teal;
             Foreground = Brushes.Teal;
             Background = new SolidColorBrush(Colors.Bisque) { Opacity = 0.97 };
@@ -76,13 +76,13 @@ namespace WPF.Core
         {
             base.OnPropertyChanged(e);
 
-            if (e.Property.Name == nameof(BubblePeakPosition))
+            if (IsLoaded && e.Property.Name == nameof(BubblePeakPosition))
             {
                 if (BubblePeakPosition.X < CornerRadius + BubblePeakWidth)
-                    SetValue(BubblePeakPositionProperty, new Point(CornerRadius + BubblePeakWidth, BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight));
+                    BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth, BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight);
 
                 if (BubblePeakPosition.X > ActualWidth - CornerRadius - BubblePeakWidth)
-                    SetValue(BubblePeakPositionProperty, new Point(ActualWidth - CornerRadius - BubblePeakWidth, BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight));
+                    BubblePeakPosition = new Point(ActualWidth - CornerRadius - BubblePeakWidth, BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight);
             }
         }
 
