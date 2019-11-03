@@ -24,7 +24,7 @@ namespace WPF.Core
 
         public TextAlignment TextAlign
         {
-            get => (TextAlignment) GetValue(TextAlignProperty);
+            get => (TextAlignment)GetValue(TextAlignProperty);
             set => SetValue(TextAlignProperty, value);
         }
         public string Text
@@ -73,8 +73,8 @@ namespace WPF.Core
             set => SetValue(PaddingProperty, value);
         }
 
-        
-        
+
+
         public Annotation()
         {
             BorderThickness = 1;
@@ -119,7 +119,7 @@ namespace WPF.Core
                             BubblePeakPosition.Y < ActualHeight ? 0 : ActualHeight);
                 }
             }
-            
+
             if (e.Property.Name == nameof(Text) && _textViewer != null)
                 _textViewer.Text = Text;
             else if (e.Property.Name == nameof(BorderBrush) && _pen != null)
@@ -134,14 +134,14 @@ namespace WPF.Core
                 _textViewer.Foreground = Foreground;
             else if (e.Property.Name == nameof(Padding) && _scrollBar != null && _textViewer != null)
                 _scrollBar.Margin = _textViewer.Padding = new Thickness(Padding);
-            
+
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
             _pen.Brush = BorderBrush;
             _pen.Thickness = BorderThickness;
-            var dX = BubblePeakPosition.Y > 0 ? ActualWidth - BubblePeakPosition.X : BubblePeakPosition.X; // rotate around x axis 
+            //
             //                  d
             //                 / \
             //     b____2____c/3 4\e___5___f
@@ -157,9 +157,9 @@ namespace WPF.Core
             //
             var a = new Point(0, CornerRadius);
             var b = new Point(CornerRadius, 0);
-            var c = new Point(dX - BubblePeakWidth / 2, 0);
-            var d = new Point(dX, -CornerRadius);
-            var e = new Point(dX + BubblePeakWidth / 2, 0);
+            var c = new Point(BubblePeakPosition.X - BubblePeakWidth / 2, 0);
+            var d = new Point(BubblePeakPosition.X, -CornerRadius);
+            var e = new Point(BubblePeakPosition.X + BubblePeakWidth / 2, 0);
             var f = new Point(ActualWidth - CornerRadius, 0);
             var g = new Point(ActualWidth, 10);
             var h = new Point(ActualWidth, ActualHeight - CornerRadius);
@@ -183,7 +183,7 @@ namespace WPF.Core
             };
 
             var pthFigure = new PathFigure(a, pathSegments, false) { IsFilled = true };
-            var transform = BubblePeakPosition.Y > 0 ? new RotateTransform(-180, ActualWidth / 2, ActualHeight / 2) : null;
+            var transform = BubblePeakPosition.Y > 0 ? new ScaleTransform(1, -1, ActualWidth / 2, ActualHeight / 2) : null; // rotate around x axis 
             var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, transform);
             drawingContext.DrawGeometry(Background, _pen, pthGeometry);
         }
