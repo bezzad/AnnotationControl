@@ -17,8 +17,19 @@ namespace WPF.Core
 
         }
 
+
         private void MainWindow_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            var padding = 25;
+            var posInView = e.GetPosition(this);
+            Note.Height = ActualHeight / 2 - padding;
+            Note.Margin = new Thickness(posInView.X - 32, posInView.Y + padding, Width - posInView.X - Note.Width, Height - posInView.Y - Note.Height - 50 - padding);
+        }
+
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonUp(e);
+
             Note.BubblePeakPosition = e.GetPosition(Note);
             Note.InvalidateVisual();
         }

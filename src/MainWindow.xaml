@@ -13,7 +13,7 @@
         <SolidColorBrush x:Key="NormalBorderBrush" Color="#888" />
         <SolidColorBrush x:Key="HorizontalNormalBrush" Color="#88189693" />
         <SolidColorBrush x:Key="HorizontalNormalBorderBrush" Color="#888" />
-        
+
         <LinearGradientBrush x:Key="PressedBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientBrush.GradientStops>
                 <GradientStopCollection>
@@ -100,7 +100,7 @@
                 <RepeatButton Grid.Row="2" Style="{StaticResource ScrollBarLineButton}" Height="18" Command="ScrollBar.LineDownCommand" Content="M 0 0 L 4 4 L 8 0 Z"/>
             </Grid>
         </ControlTemplate>
-        
+
         <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
             <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -113,7 +113,7 @@
             </Style.Triggers>
         </Style>
 
-        
+
     </Window.Resources>
 
     <Grid Background="Bisque">
@@ -165,6 +165,6 @@
             Ei nec mollis corrumpit adversarium. Vis ullum error aeterno no, noster nonumes in vis, no mnesarchum efficiantur vix. At soleat dolores splendide eum, insolens inimicus nam cu, ignota aliquam eum an. Novum iriure voluptaria no per, in populo tibique singulis nec. Id quo omnium recusabo, sed et.
         </TextBlock>
 
-        <core:Annotation x:Name="Note" Width="300" Height="200" FlowDirection="RightToLeft" Padding="4" />
+        <core:Annotation x:Name="Note" Width="300" Height="200" FlowDirection="RightToLeft" Padding="4" Margin="178,144,322,90" />
     </Grid>
 </Window>
