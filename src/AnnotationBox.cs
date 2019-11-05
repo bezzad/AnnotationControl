@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Annotations;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -15,7 +14,7 @@ namespace AnnotationControl
 
             Padding = new Thickness(5, 5, 5, 5);
             BorderThickness = new Thickness(1);
-            CornerRadius = 10;
+            CornerRadius = 8;
             BubblePeakWidth = 16;
             BorderBrush = Brushes.Teal;
             BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth, 0);
@@ -26,6 +25,8 @@ namespace AnnotationControl
             FontFamily = new FontFamily("Arial");
             TextViewer.TextDirection = FlowDirection.RightToLeft;
             TextViewer.TextAlign = TextAlignment.Justify;
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
 
 
@@ -136,6 +137,7 @@ namespace AnnotationControl
             //var transform = BubblePeakPosition.Y > 0 ? new ScaleTransform(1, -1, ActualWidth / 2, ActualHeight / 2) : null; // rotate around x axis 
             var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, null);
             dc.DrawGeometry(Background, new Pen(BorderBrush, BorderThickness.Right), pthGeometry);
+            TextViewer.InvalidateVisual();
         }
     }
 }

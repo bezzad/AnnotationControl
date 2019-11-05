@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -34,10 +35,14 @@ namespace AnnotationControl
                 MaxTextWidth = ActualWidth - Padding.Left - Padding.Right
             };
 
-            if (ft.Height > ft.LineHeight)
+            if (Parent is ScrollViewer container)
             {
-                ft.MaxTextWidth = ActualWidth - Padding.Left - Padding.Right - ScrollBarWidth;
-                Height = ft.Height + Padding.Top + Padding.Bottom;
+                if (ft.Height > container.Height) // when scrollbar visible
+                {
+                    ft.MaxTextWidth = ActualWidth - Padding.Left - Padding.Right - ScrollBarWidth;
+                }
+                // Note set parent height from here, when the text height is less than parent height
+                Height = Math.Max(ft.Height + Padding.Top + Padding.Bottom, container.Height);
             }
 
             dc.DrawText(ft, new Point(Padding.Left, Padding.Top));
