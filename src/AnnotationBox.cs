@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Annotations;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WPF.Core
+namespace AnnotationControl
 {
     public class AnnotationBox : ScrollViewer
     {
@@ -30,11 +31,11 @@ namespace WPF.Core
 
         private TextCanvas TextViewer { get; set; }
 
-        public static readonly DependencyProperty BubblePeakWidthProperty = DependencyProperty.Register(nameof(BubblePeakWidth), typeof(double), typeof(Annotation), new PropertyMetadata(default(double)));
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(double), typeof(Annotation), new PropertyMetadata(default(double)));
-        public static readonly DependencyProperty BubblePeakPositionProperty = DependencyProperty.Register(nameof(BubblePeakPosition), typeof(Point), typeof(Annotation), new PropertyMetadata(default(Point)));
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(Annotation), new PropertyMetadata(default(string)));
-        public static readonly DependencyProperty TextAlignProperty = DependencyProperty.Register(nameof(TextAlign), typeof(TextAlignment), typeof(Annotation), new PropertyMetadata(default(TextAlignment)));
+        public static readonly DependencyProperty BubblePeakWidthProperty = DependencyProperty.Register(nameof(BubblePeakWidth), typeof(double), typeof(AnnotationBox), new PropertyMetadata(default(double)));
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(double), typeof(AnnotationBox), new PropertyMetadata(default(double)));
+        public static readonly DependencyProperty BubblePeakPositionProperty = DependencyProperty.Register(nameof(BubblePeakPosition), typeof(Point), typeof(AnnotationBox), new PropertyMetadata(default(Point)));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(AnnotationBox), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty TextAlignProperty = DependencyProperty.Register(nameof(TextAlign), typeof(TextAlignment), typeof(AnnotationBox), new PropertyMetadata(default(TextAlignment)));
 
 
         public new Brush Background { get; set; }

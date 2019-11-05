@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WPF.Core
+namespace AnnotationControl
 {
     public class TextCanvas : Canvas
     {
