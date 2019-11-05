@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:core="clr-namespace:WPF.Core"
         mc:Ignorable="d"
         Title=".Net Core" Height="450" Width="800" MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown">
     <Window.Resources>
@@ -116,8 +115,9 @@
 
     </Window.Resources>
 
-    <Canvas Background="Bisque" Name="MainCanvas">
-        <TextBlock FlowDirection="LeftToRight" TextAlignment="Justify" TextWrapping="Wrap" Padding="20" Height="414" Canvas.Left="10" Width="780" Canvas.Top="10">
+    <Grid>
+        <Canvas Background="Bisque" Name="MainCanvas">
+            <TextBlock FlowDirection="LeftToRight" TextAlignment="Justify" TextWrapping="Wrap" Padding="20" Height="414" Canvas.Left="10" Width="780" Canvas.Top="10">
             Lorem ipsum dolor sit amet, eos exerci explicari definitionem ut. Eum enim brute in. No quis nominavi duo, has nibh errem commune ad. Eu ius duis probo, eu omnesque partiendo mea, at vix quot partem meliore. Percipit constituto reprehendunt ei quo, error iudicabit moderatius ei pri.
 
             Cu vide scriptorem mea, an veniam senserit eum. Quo elit commune appetere ea, pri ex augue altera ocurreret, te zril homero legendos sea. Id nemore vidisse mediocritatem qui, duo in euismod splendide. Pro an summo delicatissimi. Choro commune usu ut, impedit fuisset torquatos ea pro.
@@ -163,6 +163,8 @@
             Pro quem nominati in, fuisset explicari cu est, vis cu aeque corpora pertinax. Id sed oratio mucius invidunt, ea tibique deserunt sed, an oblique oportere eloquentiam vim. Mel in nisl quaeque forensibus, nihil essent ornatus te mel, eam ea sint meis. Eum at unum eruditi theophrastus, mel id elit brute.
 
             Ei nec mollis corrumpit adversarium. Vis ullum error aeterno no, noster nonumes in vis, no mnesarchum efficiantur vix. At soleat dolores splendide eum, insolens inimicus nam cu, ignota aliquam eum an. Novum iriure voluptaria no per, in populo tibique singulis nec. Id quo omnium recusabo, sed et.
-        </TextBlock>
-    </Canvas>
+            </TextBlock>
+        </Canvas>
+    </Grid>
+
 </Window>
