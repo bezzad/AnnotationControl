@@ -5,12 +5,13 @@ using System.Windows.Media;
 
 namespace AnnotationControl
 {
-    public class AnnotationBox : ScrollViewer
+    public class AnnotationBox : Decorator
     {
         public AnnotationBox()
         {
+            ScrollViewer = new ScrollViewer();
             TextViewer = new TextCanvas();
-            Content = TextViewer;
+            ScrollViewer.Content = TextViewer;
 
             Padding = new Thickness(5, 5, 5, 5);
             BorderThickness = new Thickness(1);
@@ -31,6 +32,8 @@ namespace AnnotationControl
 
 
         private TextCanvas TextViewer { get; set; }
+        private ScrollViewer ScrollViewer { get; set; }
+
 
         public static readonly DependencyProperty BubblePeakWidthProperty = DependencyProperty.Register(nameof(BubblePeakWidth), typeof(double), typeof(AnnotationBox), new PropertyMetadata(default(double)));
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(double), typeof(AnnotationBox), new PropertyMetadata(default(double)));
@@ -39,7 +42,7 @@ namespace AnnotationControl
         public static readonly DependencyProperty TextAlignProperty = DependencyProperty.Register(nameof(TextAlign), typeof(TextAlignment), typeof(AnnotationBox), new PropertyMetadata(default(TextAlignment)));
 
 
-        public new Brush Background { get; set; }
+        public Brush Background { get; set; }
 
         public TextAlignment TextAlign
         {
