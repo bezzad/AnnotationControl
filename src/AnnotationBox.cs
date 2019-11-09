@@ -11,9 +11,6 @@ namespace AnnotationControl
         /// <summary>
         /// Annotation Viewer on a container
         /// </summary>
-        /// <param name="text">which text should be shown</param>
-        /// <param name="dir">text flow direction</param>
-        /// <param name="containerElement">container element which we needed it to calculate the annotation box location and size according to that.</param>
         public AnnotationBox()
         {
             _scrollViewer = new ScrollViewer
@@ -101,7 +98,13 @@ namespace AnnotationControl
             set => _textViewer.TextDirection = value;
         }
 
-
+        /// <summary>
+        /// display annotation on container view
+        /// </summary>
+        /// <param name="posInView">position in container</param>
+        /// <param name="text">which text should be shown</param>
+        /// <param name="dir">text flow direction</param>
+        /// <param name="containerElement">container element which we needed it to calculate the annotation box location and size according to that.</param>
         public void Open(Point posInView, string text, FlowDirection dir, FrameworkElement containerElement)
         {
             TextDirection = dir;
