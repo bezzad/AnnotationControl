@@ -14,8 +14,8 @@ namespace AnnotationControl
         public double FontSize { get; set; }
         public TextAlignment TextAlign { get; set; }
         public string Text { get; set; }
-        public double ScrollBarWidth { get; set; } = 23;
-        //public Thickness Padding { get; set; }
+        public double ScrollBarWidth { get; set; } = 12;
+        public Thickness Padding { get; set; }
 
         public TextCanvas()
         {
@@ -26,26 +26,26 @@ namespace AnnotationControl
 
         protected override void OnRender(DrawingContext dc)
         {
-            var ft = new FormattedText(Text, CultureInfo.CurrentCulture, TextDirection,
-                new Typeface(FontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
-                FontSize, Foreground, new NumberSubstitution(), VisualTreeHelper.GetDpi(this).PixelsPerDip)
+            if (Parent is ScrollViewer container && container.ActualWidth > 0)
             {
-                LineHeight = FontSize,
-                TextAlignment = TextAlign,
-                MaxTextWidth = ActualWidth - ScrollBarWidth//- Padding.Left - Padding.Right
-            };
-
-            if (Parent is ScrollViewer container)
-            {
-                if (ft.Height > container.ActualHeight) // when scrollbar visible
+                var ft = new FormattedText(Text, CultureInfo.CurrentCulture, TextDirection,
+                    new Typeface(FontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
+                    FontSize, Foreground, new NumberSubstitution(), VisualTreeHelper.GetDpi(this).PixelsPerDip)
                 {
-                    ft.MaxTextWidth = ActualWidth - ScrollBarWidth; //- Padding.Left - Padding.Right - ScrollBarWidth;
+                    LineHeight = FontSize,
+                    TextAlignment = TextAlign,
+                    MaxTextWidth = container.ActualWidth - Padding.Left - Padding.Right
+                };
+
+                if (ft.Height > container.ActualHeight - Padding.Top - Padding.Bottom) // when scrollbar visible
+                {
+                    ft.MaxTextWidth = container.ActualWidth - Padding.Left - Padding.Right - ScrollBarWidth;
                 }
                 // Note set parent height from here, when the text height is less than parent height
-                Height = Math.Max(ft.Height /* + Padding.Top + Padding.Bottom */, container.ActualHeight);
-            }
+                Height = Math.Max(ft.Height + Padding.Top + Padding.Bottom, container.ActualHeight);
 
-            dc.DrawText(ft, new Point(0, 0));
+                dc.DrawText(ft, new Point(0, 0));
+            }
         }
     }
 }

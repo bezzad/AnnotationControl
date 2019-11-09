@@ -51,8 +51,18 @@ namespace AnnotationControl
         public Thickness Padding
         {
             get => _scrollViewer.Padding;
-            set => _scrollViewer.Padding = value;
+            set
+            {
+                _textViewer.Padding = new Thickness(
+                    value.Left + _scrollViewer.Margin.Left, 
+                    value.Top + _scrollViewer.Margin.Top,
+                    value.Right + _scrollViewer.Margin.Right,
+                    value.Bottom + _scrollViewer.Margin.Bottom);
+
+                _scrollViewer.Padding = value;
+            }
         }
+
         public Brush Foreground
         {
             get => _textViewer.Foreground;
