@@ -105,11 +105,8 @@ namespace AnnotationControl
         /// <param name="text">which text should be shown</param>
         /// <param name="dir">text flow direction</param>
         /// <param name="containerElement">container element which we needed it to calculate the annotation box location and size according to that.</param>
-        public void Open(Point posInView, string text, FlowDirection dir, FrameworkElement containerElement)
+        public void Open(Point posInView, FrameworkElement containerElement)
         {
-            TextDirection = dir;
-            Text = text;
-
             // cause to re-render
             Height = containerElement.ActualHeight * HeightRatio;
             Width = containerElement.ActualWidth * WidthRatio;
