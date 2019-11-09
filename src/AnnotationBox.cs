@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -174,7 +173,7 @@ namespace AnnotationControl
                 {
                     Format = new FormattedText(Text, CultureInfo.CurrentCulture, TextDirection,
                         new Typeface(FontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
-                        FontSize, Foreground, new NumberSubstitution(), VisualTreeHelper.GetDpi(this).PixelsPerDip)
+                        FontSize, Foreground, VisualTreeHelper.GetDpi(this).PixelsPerDip)
                     {
                         TextAlignment = TextAlign,
                         MaxTextWidth = Container.ActualWidth - Padding.Left - Padding.Right
