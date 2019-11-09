@@ -24,7 +24,7 @@ namespace AnnotationControl
             CornerRadius = 8;
             BubblePeakWidth = 16;
             BubblePeakHeight = 10;
-            BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth, 0);
+            BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth + 1, -BubblePeakHeight);
             Padding = new Thickness(5);
             BorderThickness = new Thickness(1);
             BorderBrush = Brushes.Teal;
@@ -55,7 +55,7 @@ namespace AnnotationControl
             set
             {
                 _textViewer.Padding = new Thickness(
-                    value.Left + _scrollViewer.Margin.Left, 
+                    value.Left + _scrollViewer.Margin.Left,
                     value.Top + _scrollViewer.Margin.Top,
                     value.Right + _scrollViewer.Margin.Right,
                     value.Bottom + _scrollViewer.Margin.Bottom);
@@ -63,7 +63,6 @@ namespace AnnotationControl
                 _scrollViewer.Padding = value;
             }
         }
-
         public Brush Foreground
         {
             get => _textViewer.Foreground;
@@ -95,19 +94,6 @@ namespace AnnotationControl
             set => _textViewer.TextDirection = value;
         }
 
-        //protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
-        //{
-        //    base.OnPropertyChanged(e);
-
-        //    if (e.OldValue != e.NewValue)
-        //    {
-        //        var prop = _textViewer?.GetType().GetProperty(e.Property.Name);
-        //        if (prop?.CanWrite == true && prop.CanRead)
-        //        {
-        //            prop.SetValue(_textViewer, e.NewValue);
-        //        }
-        //    }
-        //}
 
 
         protected override void OnRender(DrawingContext dc)
@@ -130,7 +116,7 @@ namespace AnnotationControl
             var a = new Point(0, CornerRadius);
             var b = new Point(CornerRadius, 0);
             var c = new Point(BubblePeakPosition.X - BubblePeakWidth / 2, 0);
-            var d = new Point(BubblePeakPosition.X, -CornerRadius);
+            var d = new Point(BubblePeakPosition.X, -BubblePeakHeight);
             var e = new Point(BubblePeakPosition.X + BubblePeakWidth / 2, 0);
             var f = new Point(ActualWidth - CornerRadius, 0);
             var g = new Point(ActualWidth, 10);
@@ -157,7 +143,7 @@ namespace AnnotationControl
             var pthFigure = new PathFigure(a, pathSegments, false) { IsFilled = true };
             //var transform = BubblePeakPosition.Y > 0 ? new ScaleTransform(1, -1, ActualWidth / 2, ActualHeight / 2) : null; // rotate around x axis 
             var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, null);
-            dc.DrawGeometry(Background, new Pen(BorderBrush, BorderThickness.Right), pthGeometry);
+            dc.DrawGeometry(Background, new Pen(BorderBrush, BorderThickness.Top), pthGeometry);
             _textViewer.ReRender();
         }
 
@@ -173,6 +159,7 @@ namespace AnnotationControl
             }
 
 
+            private FormattedText Format { get; set; }
             public FlowDirection TextDirection { get; set; }
             public Brush Foreground { get; set; }
             public TextAlignment TextAlign { get; set; }
@@ -185,7 +172,7 @@ namespace AnnotationControl
             {
                 if (Container?.ActualWidth > 0)
                 {
-                    var ft = new FormattedText(Text, CultureInfo.CurrentCulture, TextDirection,
+                    Format = new FormattedText(Text, CultureInfo.CurrentCulture, TextDirection,
                         new Typeface(FontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
                         FontSize, Foreground, new NumberSubstitution(), VisualTreeHelper.GetDpi(this).PixelsPerDip)
                     {
@@ -193,14 +180,23 @@ namespace AnnotationControl
                         MaxTextWidth = Container.ActualWidth - Padding.Left - Padding.Right
                     };
 
-                    if (ft.Height > Container.ActualHeight - Padding.Top - Padding.Bottom) // when scrollbar visible
+                    if (Format.Height + Padding.Top + Padding.Bottom > Container.ActualHeight) // when scrollbar visible
                     {
-                        ft.MaxTextWidth = Container.ActualWidth - Padding.Left - Padding.Right - ScrollBarWidth;
+                        Format.MaxTextWidth = Container.ActualWidth - Padding.Left - Padding.Right - ScrollBarWidth;
                     }
-                    // Note set parent height from here, when the text height is less than parent height
-                    Height = Math.Max(ft.Height + Padding.Top + Padding.Bottom, Container.ActualHeight);
 
-                    dc.DrawText(ft, new Point(0, 0));
+                    Height = Format.Height;
+
+                    // Note set parent height from here, when the text height is less than parent height
+                    if (Container.Parent is AnnotationBox ann)
+                    {
+                        var realAnnotationHeight = Height + Padding.Top + Padding.Bottom + ann.BorderThickness.Top + ann.BorderThickness.Bottom + ann.BubblePeakHeight;
+                        if (ann.ActualHeight > realAnnotationHeight)
+                            ann.Height = realAnnotationHeight;
+                    }
+
+
+                    dc.DrawText(Format, new Point(0, 0));
                 }
             }
         }
