@@ -25,7 +25,6 @@ namespace AnnotationControl
                 Text = text,
                 TextDirection = FlowDirection.RightToLeft
             };
-            MainCanvas.Children.Add(AnnotationBox);
         }
 
 
