@@ -161,7 +161,7 @@ namespace AnnotationControl
 
 
 
-        private class TextCanvas : Canvas
+        private class TextCanvas : BaseTextViewer
         {
             public TextCanvas(ScrollViewer parent)
             {
@@ -173,12 +173,9 @@ namespace AnnotationControl
 
             public FlowDirection TextDirection { get; set; }
             public Brush Foreground { get; set; }
-            public FontFamily FontFamily { get; set; }
-            public double FontSize { get; set; }
             public TextAlignment TextAlign { get; set; }
             public string Text { get; set; }
             public double ScrollBarWidth { get; set; } = 12;
-            public Thickness Padding { get; set; }
             public ScrollViewer Container { get; set; }
 
 
