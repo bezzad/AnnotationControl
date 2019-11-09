@@ -144,6 +144,11 @@ namespace AnnotationControl
             var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, null);
             dc.DrawGeometry(Background, new Pen(BorderBrush, BorderThickness.Top), pthGeometry);
             _textViewer.ReRender();
+            //
+            // set height according text height
+            var realAnnotationHeight = _textViewer.Height + _textViewer.Padding.Top + _textViewer.Padding.Bottom + BorderThickness.Top + BorderThickness.Bottom + BubblePeakHeight;
+            if (ActualHeight > realAnnotationHeight)
+                Height = realAnnotationHeight;
         }
 
 
@@ -186,15 +191,7 @@ namespace AnnotationControl
 
                     Height = Format.Height;
 
-                    // Note set parent height from here, when the text height is less than parent height
-                    if (Container.Parent is AnnotationBox ann)
-                    {
-                        var realAnnotationHeight = Height + Padding.Top + Padding.Bottom + ann.BorderThickness.Top + ann.BorderThickness.Bottom + ann.BubblePeakHeight;
-                        if (ann.ActualHeight > realAnnotationHeight)
-                            ann.Height = realAnnotationHeight;
-                    }
-
-
+                   
                     dc.DrawText(Format, new Point(0, 0));
                 }
             }
