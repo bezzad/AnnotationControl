@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -9,18 +11,20 @@ namespace AnnotationControl
     {
         public AnnotationBox(string text, FlowDirection dir)
         {
-            _textViewer = new TextCanvas
-            {
-                TextDirection = dir,
-                TextAlign = TextAlignment.Justify
-            };
             _scrollViewer = new ScrollViewer
             {
                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden,
-                Margin = new Thickness(3),
-                Content = _textViewer
+                Margin = new Thickness(3)
             };
+
+            _textViewer = new TextCanvas(_scrollViewer)
+            {
+                TextDirection = dir,
+                TextAlign = TextAlignment.Justify
+            };
+            
+            _scrollViewer.Content = _textViewer;
 
             CornerRadius = 8;
             BubblePeakWidth = 16;
@@ -153,6 +157,54 @@ namespace AnnotationControl
             var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, null);
             dc.DrawGeometry(Background, new Pen(BorderBrush, BorderThickness.Right), pthGeometry);
             _textViewer.InvalidateVisual();
+        }
+
+
+
+        private class TextCanvas : Canvas
+        {
+            public TextCanvas(ScrollViewer parent)
+            {
+                Container = parent;
+                ClipToBounds = true;
+                Background = Brushes.Transparent;
+            }
+
+
+            public FlowDirection TextDirection { get; set; }
+            public Brush Foreground { get; set; }
+            public FontFamily FontFamily { get; set; }
+            public double FontSize { get; set; }
+            public TextAlignment TextAlign { get; set; }
+            public string Text { get; set; }
+            public double ScrollBarWidth { get; set; } = 12;
+            public Thickness Padding { get; set; }
+            public ScrollViewer Container { get; set; }
+
+
+            protected override void OnRender(DrawingContext dc)
+            {
+                if (Container?.ActualWidth > 0)
+                {
+                    var ft = new FormattedText(Text, CultureInfo.CurrentCulture, TextDirection,
+                        new Typeface(FontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
+                        FontSize, Foreground, new NumberSubstitution(), VisualTreeHelper.GetDpi(this).PixelsPerDip)
+                    {
+                        LineHeight = FontSize,
+                        TextAlignment = TextAlign,
+                        MaxTextWidth = Container.ActualWidth - Padding.Left - Padding.Right
+                    };
+
+                    if (ft.Height > Container.ActualHeight - Padding.Top - Padding.Bottom) // when scrollbar visible
+                    {
+                        ft.MaxTextWidth = Container.ActualWidth - Padding.Left - Padding.Right - ScrollBarWidth;
+                    }
+                    // Note set parent height from here, when the text height is less than parent height
+                    Height = Math.Max(ft.Height + Padding.Top + Padding.Bottom, Container.ActualHeight);
+
+                    dc.DrawText(ft, new Point(0, 0));
+                }
+            }
         }
     }
 }
