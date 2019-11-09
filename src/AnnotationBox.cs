@@ -120,6 +120,12 @@ namespace AnnotationControl
             {
                 BubblePeakPosition = new Point(BubblePeakPosition.X, Height + BubblePeakHeight);
             }
+            if (posInView.X + Width > _containerElement.ActualWidth) // overflowed from container right 
+            {
+                BubblePeakPosition = new Point(Width - BubblePeakPosition.X, BubblePeakPosition.Y);
+                Canvas.SetLeft(this, posInView.X - BubblePeakPosition.X);
+            }
+
             Canvas.SetTop(this, posInView.Y - BubblePeakPosition.Y);
 
 
