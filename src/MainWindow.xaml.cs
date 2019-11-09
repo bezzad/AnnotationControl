@@ -29,7 +29,7 @@ namespace AnnotationControl
 
         private void MainWindow_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            AnnotationBox?.Open(e.GetPosition(MainCanvas), MainCanvas);
+            AnnotationBox?.Open(MainCanvas.PointToScreen(e.GetPosition(MainCanvas)), MainCanvas);
         }
 
     }
