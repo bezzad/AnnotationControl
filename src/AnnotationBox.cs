@@ -18,25 +18,22 @@ namespace AnnotationControl
                 Margin = new Thickness(3)
             };
 
-            _textViewer = new TextCanvas(_scrollViewer)
-            {
-                TextDirection = dir,
-                TextAlign = TextAlignment.Justify
-            };
-            
+            _textViewer = new TextCanvas(_scrollViewer);
             _scrollViewer.Content = _textViewer;
 
             CornerRadius = 8;
             BubblePeakWidth = 16;
             BubblePeakHeight = 10;
             BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth, 0);
-            Padding = new Thickness(5, 5, 5, 5);
+            Padding = new Thickness(5);
             BorderThickness = new Thickness(1);
             BorderBrush = Brushes.Teal;
             Foreground = Brushes.Teal;
             Background = new SolidColorBrush(Colors.Bisque) { Opacity = 0.97 };
             FontSize = 16;
             FontFamily = new FontFamily("Arial");
+            TextAlign = TextAlignment.Justify;
+            TextDirection = dir;
             Text = text;
 
             Child = _scrollViewer;
@@ -91,6 +88,11 @@ namespace AnnotationControl
         {
             get => _textViewer.FontSize;
             set => _textViewer.FontSize = value;
+        }
+        public FlowDirection TextDirection
+        {
+            get => _textViewer.TextDirection;
+            set => _textViewer.TextDirection = value;
         }
 
         //protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -156,7 +158,7 @@ namespace AnnotationControl
             //var transform = BubblePeakPosition.Y > 0 ? new ScaleTransform(1, -1, ActualWidth / 2, ActualHeight / 2) : null; // rotate around x axis 
             var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, null);
             dc.DrawGeometry(Background, new Pen(BorderBrush, BorderThickness.Right), pthGeometry);
-            _textViewer.InvalidateVisual();
+            _textViewer.ReRender();
         }
 
 
@@ -187,7 +189,6 @@ namespace AnnotationControl
                         new Typeface(FontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
                         FontSize, Foreground, new NumberSubstitution(), VisualTreeHelper.GetDpi(this).PixelsPerDip)
                     {
-                        LineHeight = FontSize,
                         TextAlignment = TextAlign,
                         MaxTextWidth = Container.ActualWidth - Padding.Left - Padding.Right
                     };
