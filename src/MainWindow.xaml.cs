@@ -21,11 +21,7 @@ namespace AnnotationControl
 وقتی بورلی در را باز کرد، دید که یوجین توی اتاق پذیرایی روبروی تلویزیون نشسته و شبکه هیستوری (تاریخ) را تماشا می‌کند. یوجین با دیدن اشک‌های بورلی گیج شده بود. او گفت که به خاطر نمی‌آورد که خانه را ترک کرده باشد، یادش نمی‌آمد که کجا بوده";
 
 
-            AnnotationBox = new AnnotationBox(text, FlowDirection.RightToLeft)
-            {
-                Width = 300,
-                Height = 200,
-            };
+            AnnotationBox = new AnnotationBox(text, FlowDirection.RightToLeft, MainCanvas);
             MainCanvas.Children.Add(AnnotationBox);
         }
 
@@ -35,7 +31,7 @@ namespace AnnotationControl
             if (AnnotationBox != null)
             {
                 var posInView = e.GetPosition(MainCanvas);
-                AnnotationBox.Height = MainCanvas.ActualHeight * 2 / 3;
+                AnnotationBox.SetAutoSize();
                 Canvas.SetLeft(AnnotationBox, posInView.X - AnnotationBox.CornerRadius - AnnotationBox.BubblePeakWidth/2 - 1);
                 Canvas.SetTop(AnnotationBox, posInView.Y + AnnotationBox.BubblePeakHeight);
             }
