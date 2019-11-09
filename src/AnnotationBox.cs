@@ -5,109 +5,111 @@ using System.Windows.Media;
 
 namespace AnnotationControl
 {
-    public class AnnotationBox : Decorator
+    public sealed class AnnotationBox : Decorator
     {
-        public AnnotationBox()
+        public AnnotationBox(string text, FlowDirection dir)
         {
-            ScrollViewer = new ScrollViewer();
-            TextViewer = new TextCanvas();
-            ScrollViewer.Content = TextViewer;
+            _textViewer = new TextCanvas
+            {
+                TextDirection = dir,
+                TextAlign = TextAlignment.Justify
+            };
+            _scrollViewer = new ScrollViewer
+            {
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden,
+                Margin = new Thickness(3),
+                Content = _textViewer
+            };
 
-            Padding = new Thickness(5, 5, 5, 5);
-            BorderThickness = new Thickness(1);
             CornerRadius = 8;
             BubblePeakWidth = 16;
-            BorderBrush = Brushes.Teal;
+            BubblePeakHeight = 10;
             BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth, 0);
+            Padding = new Thickness(5, 5, 5, 5);
+            BorderThickness = new Thickness(1);
+            BorderBrush = Brushes.Teal;
             Foreground = Brushes.Teal;
             Background = new SolidColorBrush(Colors.Bisque) { Opacity = 0.97 };
-            base.Background = Brushes.Transparent;
             FontSize = 16;
             FontFamily = new FontFamily("Arial");
-            TextViewer.TextDirection = FlowDirection.RightToLeft;
-            TextViewer.TextAlign = TextAlignment.Justify;
-            VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-            HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            Text = text;
+
+            Child = _scrollViewer;
         }
 
 
-        private TextCanvas TextViewer { get; set; }
-        private ScrollViewer ScrollViewer { get; set; }
-
-
-        public static readonly DependencyProperty BubblePeakWidthProperty = DependencyProperty.Register(nameof(BubblePeakWidth), typeof(double), typeof(AnnotationBox), new PropertyMetadata(default(double)));
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(double), typeof(AnnotationBox), new PropertyMetadata(default(double)));
-        public static readonly DependencyProperty BubblePeakPositionProperty = DependencyProperty.Register(nameof(BubblePeakPosition), typeof(Point), typeof(AnnotationBox), new PropertyMetadata(default(Point)));
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(AnnotationBox), new PropertyMetadata(default(string)));
-        public static readonly DependencyProperty TextAlignProperty = DependencyProperty.Register(nameof(TextAlign), typeof(TextAlignment), typeof(AnnotationBox), new PropertyMetadata(default(TextAlignment)));
-
-
+        private readonly TextCanvas _textViewer;
+        private readonly ScrollViewer _scrollViewer;
+        public double CornerRadius { get; set; }
+        public double BubblePeakWidth { get; set; }
+        public double BubblePeakHeight { get; set; }
+        public Point BubblePeakPosition { get; set; }
+        public Brush BorderBrush { get; set; }
         public Brush Background { get; set; }
-
+        public Thickness BorderThickness { get; set; }
+        public Thickness Padding
+        {
+            get => _scrollViewer.Padding;
+            set => _scrollViewer.Padding = value;
+        }
+        public Brush Foreground
+        {
+            get => _textViewer.Foreground;
+            set => _textViewer.Foreground = value;
+        }
         public TextAlignment TextAlign
         {
-            get => (TextAlignment)GetValue(TextAlignProperty);
-            set => SetValue(TextAlignProperty, value);
+            get => _textViewer.TextAlign;
+            set => _textViewer.TextAlign = value;
         }
         public string Text
         {
-            get => (string)GetValue(TextProperty);
-            set
-            {
-                SetValue(TextProperty, value);
-                TextViewer.Text = Text;
-            }
+            get => _textViewer.Text;
+            set => _textViewer.Text = value;
+        }
+        public FontFamily FontFamily
+        {
+            get => _textViewer.FontFamily;
+            set => _textViewer.FontFamily = value;
+        }
+        public double FontSize
+        {
+            get => _textViewer.FontSize;
+            set => _textViewer.FontSize = value;
         }
 
-        public Point BubblePeakPosition
-        {
-            get => (Point)GetValue(BubblePeakPositionProperty);
-            set => SetValue(BubblePeakPositionProperty, value);
-        }
-        public double CornerRadius
-        {
-            get => (double)GetValue(CornerRadiusProperty);
-            set => SetValue(CornerRadiusProperty, value);
-        }
-        public double BubblePeakWidth
-        {
-            get => (double)GetValue(BubblePeakWidthProperty);
-            set => SetValue(BubblePeakWidthProperty, value);
-        }
+        //protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        //{
+        //    base.OnPropertyChanged(e);
 
-
-        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
-
-            if (e.OldValue != e.NewValue)
-            {
-                var prop = TextViewer?.GetType().GetProperty(e.Property.Name);
-                if (prop?.CanWrite == true && prop.CanRead == true)
-                {
-                    prop.SetValue(TextViewer, e.NewValue);
-                }
-            }
-        }
+        //    if (e.OldValue != e.NewValue)
+        //    {
+        //        var prop = _textViewer?.GetType().GetProperty(e.Property.Name);
+        //        if (prop?.CanWrite == true && prop.CanRead)
+        //        {
+        //            prop.SetValue(_textViewer, e.NewValue);
+        //        }
+        //    }
+        //}
 
 
         protected override void OnRender(DrawingContext dc)
         {
-            base.OnRender(dc);
-
-            //
-            //                  d
-            //                 / \
-            //     b____2____c/3 4\e___5___f
-            //    (1                       6)
-            //    a                         g
-            //    |                         |
-            //    |                         |
-            //  11|                         |7
-            //    |                         |
-            //    |                         |
-            //    k                         h
-            //  10(j___________9___________i)8
+            //                        Width
+            //            <------------------------->  
+            //    ^                     d = BubblePeakPosition
+            //    |                    / \
+            //    |        b____2____c/3 4\e___5___f
+            // H  |       (1                       6)
+            // E  |       a   TTTTTTTTTTTTTTTTTT    g
+            // I  |       |   TT              TT    |
+            // G  |       |   TT     TEXT     TT    |
+            // H  |     11|   TT              TT    |7
+            // T  |       |   TT              TT    |
+            //    |       |   TTTTTTTTTTTTTTTTTT    |
+            //    |       k                         h
+            //   _|_    10(j___________9___________i)8
             //
             var a = new Point(0, CornerRadius);
             var b = new Point(CornerRadius, 0);
@@ -140,7 +142,7 @@ namespace AnnotationControl
             //var transform = BubblePeakPosition.Y > 0 ? new ScaleTransform(1, -1, ActualWidth / 2, ActualHeight / 2) : null; // rotate around x axis 
             var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, null);
             dc.DrawGeometry(Background, new Pen(BorderBrush, BorderThickness.Right), pthGeometry);
-            TextViewer.InvalidateVisual();
+            _textViewer.InvalidateVisual();
         }
     }
 }

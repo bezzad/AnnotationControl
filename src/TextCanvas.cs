@@ -15,7 +15,7 @@ namespace AnnotationControl
         public TextAlignment TextAlign { get; set; }
         public string Text { get; set; }
         public double ScrollBarWidth { get; set; } = 23;
-        public Thickness Padding { get; set; }
+        //public Thickness Padding { get; set; }
 
         public TextCanvas()
         {
@@ -32,21 +32,20 @@ namespace AnnotationControl
             {
                 LineHeight = FontSize,
                 TextAlignment = TextAlign,
-                MaxTextWidth = ActualWidth - Padding.Left - Padding.Right
+                MaxTextWidth = ActualWidth - ScrollBarWidth//- Padding.Left - Padding.Right
             };
 
             if (Parent is ScrollViewer container)
             {
-                if (ft.Height > container.Height) // when scrollbar visible
+                if (ft.Height > container.ActualHeight) // when scrollbar visible
                 {
-                    ft.MaxTextWidth = ActualWidth - Padding.Left - Padding.Right - ScrollBarWidth;
+                    ft.MaxTextWidth = ActualWidth - ScrollBarWidth; //- Padding.Left - Padding.Right - ScrollBarWidth;
                 }
                 // Note set parent height from here, when the text height is less than parent height
-                Height = Math.Max(ft.Height + Padding.Top + Padding.Bottom, container.Height);
+                Height = Math.Max(ft.Height /* + Padding.Top + Padding.Bottom */, container.ActualHeight);
             }
 
-            dc.DrawText(ft, new Point(Padding.Left, Padding.Top));
-
+            dc.DrawText(ft, new Point(0, 0));
         }
     }
 }
