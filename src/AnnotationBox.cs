@@ -30,7 +30,7 @@ namespace AnnotationControl
 
             WidthRatio = 0.5;
             HeightRatio = 0.5;
-            SetAutoSize();
+            Open(new Point(0, 0));
             CornerRadius = 8;
             BubblePeakWidth = 16;
             BubblePeakHeight = 10;
@@ -108,11 +108,15 @@ namespace AnnotationControl
         }
 
 
-        public void SetAutoSize()
+        public void Open(Point posInView)
         {
             // cause to re-render
             Height = _containerElement.ActualHeight * HeightRatio;
             Width = _containerElement.ActualWidth * WidthRatio;
+            BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth / 2 + 1, -BubblePeakHeight);
+            Canvas.SetLeft(this, posInView.X - BubblePeakPosition.X);
+            Canvas.SetTop(this, posInView.Y - BubblePeakPosition.Y);
+            InvalidateVisual();
         }
 
 
@@ -183,6 +187,7 @@ namespace AnnotationControl
             public TextCanvas(ScrollViewer parent)
             {
                 Container = parent;
+                SnapsToDevicePixels = true;
                 ClipToBounds = true;
                 Background = Brushes.Transparent;
             }

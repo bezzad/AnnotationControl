@@ -28,24 +28,8 @@ namespace AnnotationControl
 
         private void MainWindow_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (AnnotationBox != null)
-            {
-                var posInView = e.GetPosition(MainCanvas);
-                AnnotationBox.SetAutoSize();
-                Canvas.SetLeft(AnnotationBox, posInView.X - AnnotationBox.CornerRadius - AnnotationBox.BubblePeakWidth/2 - 1);
-                Canvas.SetTop(AnnotationBox, posInView.Y + AnnotationBox.BubblePeakHeight);
-            }
+            AnnotationBox?.Open(e.GetPosition(MainCanvas));
         }
 
-        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
-        {
-            base.OnMouseLeftButtonUp(e);
-
-            if (AnnotationBox != null)
-            {
-                AnnotationBox.BubblePeakPosition = e.GetPosition(AnnotationBox);
-                AnnotationBox.InvalidateVisual();
-            }
-        }
     }
 }
