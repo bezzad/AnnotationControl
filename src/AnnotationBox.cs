@@ -115,7 +115,15 @@ namespace AnnotationControl
             Width = _containerElement.ActualWidth * WidthRatio;
             BubblePeakPosition = new Point(CornerRadius + BubblePeakWidth / 2 + 1, -BubblePeakHeight);
             Canvas.SetLeft(this, posInView.X - BubblePeakPosition.X);
+
+            if (posInView.Y + Height + BubblePeakHeight > _containerElement.ActualHeight) // overflowed from container bottom 
+            {
+                BubblePeakPosition = new Point(BubblePeakPosition.X, Height + BubblePeakHeight);
+            }
             Canvas.SetTop(this, posInView.Y - BubblePeakPosition.Y);
+
+
+            Visibility = Visibility.Visible;
             InvalidateVisual();
         }
 
@@ -167,8 +175,8 @@ namespace AnnotationControl
                     new LineSegment(a, true)
                 };
                 var pthFigure = new PathFigure(a, pathSegments, false) { IsFilled = true };
-                //var transform = BubblePeakPosition.Y > 0 ? new ScaleTransform(1, -1, ActualWidth / 2, ActualHeight / 2) : null; // rotate around x axis 
-                var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, null);
+                var rotateAroundXAxisTransform = new ScaleTransform(1, BubblePeakPosition.Y > 0 ? -1 : 1, ActualWidth / 2, ActualHeight / 2);
+                var pthGeometry = new PathGeometry(new List<PathFigure> { pthFigure }, FillRule.EvenOdd, rotateAroundXAxisTransform);
                 dc.DrawGeometry(Background, new Pen(BorderBrush, BorderThickness.Top), pthGeometry);
                 _textViewer.ReRender();
                 //
@@ -179,7 +187,6 @@ namespace AnnotationControl
                     Height = realAnnotationHeight;
             }
         }
-
 
 
         private class TextCanvas : BaseTextViewer
