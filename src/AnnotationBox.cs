@@ -103,8 +103,6 @@ namespace AnnotationControl
         /// display annotation on container view
         /// </summary>
         /// <param name="posInView">position in container</param>
-        /// <param name="text">which text should be shown</param>
-        /// <param name="dir">text flow direction</param>
         /// <param name="containerElement">container element which we needed it to calculate the annotation box location and size according to that.</param>
         public void Open(Point posInView, Canvas containerElement)
         {
